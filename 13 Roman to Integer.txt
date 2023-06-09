@@ -1,0 +1,86 @@
+class Solution {
+public:
+    int chto_int(char a)
+    {
+        if(a == 'I')
+        {
+            return 1;
+        }
+        if(a == 'V')
+        {
+            return 5;
+        }
+        if(a == 'X')
+        {
+            return 10;
+        }
+        if(a == 'L')
+        {
+            return 50;
+        }
+        if(a == 'C')
+        {
+            return 100;
+        }
+        if(a == 'D')
+        {
+            return 500;
+        }
+        if(a == 'M')
+        {
+            return 1000;
+        }
+        return 0;
+    }
+    int twoch(char x,char y)
+    {
+        if(x=='I' && y=='V')
+        {
+            return 4;
+        }
+        if(x=='I' && y=='X')
+        {
+            return 9;
+        }
+        if(x=='X' && y=='L')
+        {
+            return 40;
+        }
+        if(x=='X' && y=='C')
+        {
+            return 90;
+        }
+        if(x=='C' && y=='D')
+        {
+            return 400;
+        }
+        if(x=='C' && y=='M')
+        {
+            return 900;
+        }
+        return 0;
+    }
+    int romanToInt(string s) {
+      int n=s.length();
+        int x=0,y=0,z=0;
+        char c,d;
+        for(int i=0;i<n;i++)
+        {
+            c=s[i];
+            d=s[i+1];
+            z=twoch(c,d);
+            if(z==0)
+            {
+                x=chto_int(c); 
+                y=x+y;
+            }
+            else
+            {
+                y=y+z;
+                i++;
+            }
+            
+        }
+        return y;
+    }
+};
