@@ -1,0 +1,75 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        // [0,2,4]  [1,3,4]
+        //[0,1,2,3,4,4]
+        ListNode *head=NULL,*tail=NULL;
+        ListNode *p,*q;
+        p=l1;
+        q=l2;
+        int smaller,duplicate=0;
+        if(p == NULL)
+            return q;
+        if(q == NULL)
+            return p;
+        while(p != NULL && q != NULL)
+        {
+            duplicate=0;
+            if(p->val < q->val)
+            {
+                smaller=p->val;
+                p=p->next;
+            }
+            else if(p->val > q->val)
+            {
+                smaller=q->val;
+                q=q->next;
+            }
+            else
+            {
+                smaller=p->val;
+                duplicate=1;
+                p=p->next;
+                q=q->next;
+            }
+            if(head == NULL)
+            {
+                ListNode *result= new ListNode(smaller);
+                
+                head=result;
+                tail=result;
+            }
+            else
+            {
+                tail->next= new ListNode(smaller);
+                tail=tail->next;
+            }
+            if(duplicate == 1)
+            {
+                tail->next= new ListNode(smaller);
+                tail=tail->next;
+            }
+        }
+        if(p == NULL && q != NULL)
+        {
+                tail->next= q;
+                tail=tail->next;   
+        }
+        if(q == NULL && p != NULL)
+        {
+                tail->next= p;
+                tail=tail->next;   
+        }
+        return head;
+    }
+};
