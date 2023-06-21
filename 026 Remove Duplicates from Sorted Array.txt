@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int c=0,n;
+        if(nums.size()==0)
+            return 0;
+        for(n=0; n<nums.size(); n++)
+        {
+            if(nums.at(c) != nums.at(n))
+            {
+                c++;
+                int temp=nums.at(c);
+                nums.at(c)=nums.at(n);
+                nums.at(n)=temp;
+            }
+        }
+        return c+1;
+        //[1,1,2,2,3]
+        // c=0 n=1 [1,1,2,2,3]
+        // c=0 n=2 [1,2,1,2,3]
+        // c=1 n=3 []
+    }
+};
